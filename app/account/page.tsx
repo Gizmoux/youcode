@@ -30,31 +30,32 @@ import { Loader, LogOut } from "lucide-react";
 
 export default function AccountPage() {
   const { data: session } = useSession();
-
+  // if (!session) {
+  //   throw new Error("No session found!!");
+  // }
   return (
     <>
-      <Card className="w-full">
+      <Card className="m-auto max-w-lg mt-4 p-4">
         {session?.user ? (
-          <CardHeader>
-            <CardTitle className="bg-red-200 w-1/2 rounded">
-              {session?.user?.image && (
-                <Image
-                  src={session.user.image}
-                  alt="user image"
-                  width={32}
-                  height={32}
-                  className="rounded-full"
-                />
-              )}
-              <h1>{session.user.email && <span>{session.user.email}</span>}</h1>
-              <p className="text-sm italic">
-                {session.user.name && <span>{session.user.name}</span>}
-              </p>
-            </CardTitle>
-            <CardFooter className="flex justify-between">
+          <CardHeader className="flex flex-row m-4">
+            {session?.user?.image && (
+              <Image
+                src={session.user.image}
+                alt="user image"
+                width={32}
+                height={32}
+                className="rounded m-8"
+              />
+            )}
+
+            <div className="flex flex-col gap-1">
+              <CardTitle>{session.user.email}</CardTitle>
+              <CardDescription>{session.user.name}</CardDescription>
+            </div>
+            <CardContent className="flex flex-col gap-2">
               <Link
                 className={buttonVariants({ variant: "outline", size: "lg" })}
-                href="/account/settings"
+                href="/account"
               >
                 Settings
               </Link>
@@ -64,34 +65,37 @@ export default function AccountPage() {
               >
                 Admin
               </Link>
-              <AlertDialog>
-                <AlertDialogTrigger asChild>
-                  {/* <Button onClick={signOut} variant="outline">Logouuuuut</Button> */}
-                  {/* <button className="bg-red-400 rounded p-3 m-3 w-20" onClick={signOut()}>Logout</button> */}
+            </CardContent>
+
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                {/* <Button onClick={signOut} variant="outline">Logouuuuut</Button> */}
+                {/* <button className="bg-red-400 rounded p-3 m-3 w-20" onClick={signOut()}>Logout</button> */}
+                <CardFooter className="flex flex-row-reverse">
                   <Button variant="destructive">
                     <LogOut />
                     Logout
                   </Button>
-                </AlertDialogTrigger>
-                <AlertDialogContent>
-                  <AlertDialogHeader>
-                    <AlertDialogTitle>
-                      Are you absolutely sure to logout?
-                    </AlertDialogTitle>
-                    <AlertDialogDescription>
-                      This action cannot be undone. This will permanently delete
-                      your account and remove your data from our servers.
-                    </AlertDialogDescription>
-                  </AlertDialogHeader>
-                  <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={() => signOut()}>
-                      Continue
-                    </AlertDialogAction>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialog>
-            </CardFooter>
+                </CardFooter>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>
+                    Are you absolutely sure to logout?
+                  </AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action cannot be undone. This will permanently delete
+                    your account and remove your data from our servers.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction onClick={() => signOut()}>
+                    Continue
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </CardHeader>
         ) : (
           <Link href="/login">
