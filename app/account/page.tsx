@@ -61,7 +61,7 @@ export default function AccountPage() {
               </Link>
               <Link
                 className={buttonVariants({ variant: "outline", size: "lg" })}
-                href="/admin"
+                href="/admin/courses/page"
               >
                 Admin
               </Link>
