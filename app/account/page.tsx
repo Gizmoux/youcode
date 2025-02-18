@@ -69,8 +69,6 @@ export default function AccountPage() {
 
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                {/* <Button onClick={signOut} variant="outline">Logouuuuut</Button> */}
-                {/* <button className="bg-red-400 rounded p-3 m-3 w-20" onClick={signOut()}>Logout</button> */}
                 <CardFooter className="flex flex-row-reverse">
                   <Button variant="destructive">
                     <LogOut />
