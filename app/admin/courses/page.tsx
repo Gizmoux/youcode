@@ -17,11 +17,6 @@ export default async function CoursesPage() {
   // Récupérer la session de l'utilisateur
   const session = await getRequiredAuthSession(); // Récupérer la session avec l'ID de l'utilisateur connecté
 
-  // Si la session est vide ou que l'utilisateur n'est pas authentifié, afficher un message d'erreur
-  if (!session?.user?.id) {
-    return <div>You need to be logged in to view your courses</div>;
-  }
-
   // Récupérer les cours associés à l'utilisateur connecté
   const courses = await prisma.course.findMany({
     where: {
